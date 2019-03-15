@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<script src="./js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<link href="./css/mui.css" rel="stylesheet" />
+		<link href="./css/loading.css" rel="stylesheet" />
+
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./js/loading.js"></script>
+		
+		
+		<style>
+			.mui-content-padded{
+			  	margin: 10px;
+			  }
+			.mui-bar-nav~.mui-content {
+				padding-top: 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<div class="mui-inner-wrap">
+		
+			<header class="mui-bar mui-bar-nav">
+				<a href="#offCanvasSide" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+				<h1 class="mui-title">ACM-ICPC</h1>
+				<a id="help" class="mui-icon mui-icon-help mui-pull-right" href="./help.html"></a>
+			</header>
+			
+			
+			
+			<div class="mui-content" style="padding-top: 40px;">
+				<div class="mui-content-padded">
+					<button onclick="check()" type="button" class="mui-btn mui-btn-success mui-btn-block">
+						点击查看
+					</button>
+				</div>
+			</div>
+			
+			<div class="mui-content">
+				<div class="mui-card">
+					<div class="mui-card-content">
+						<div id="showbar" class="mui-card-content-inner" 
+							style="text-align: center;">
+							院队现在门开吗
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+
+	</body>
+	
+	<script>
+		function welcome(){	
+			mui.ajax('http://cicada.iask.in/ACM/acm.php',{
+				data:{
+					q:"operation",
+					operation: "start"
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'get',//HTTP请求类型
+				timeout:4000,//超时时间设置为10秒；
+				//headers:{'Content-Type':'application/json'},	              
+				beforeSend: function() {
+					msg = "读取蝉说";
+					mui.showLoading(msg,"div"); //加载文字和类型，plus环境中类型为div时强制以div方式显示  		
+				},
+				complete: function() {
+					mui.hideLoading(function(){
+						
+					});//隐藏后的回调函数  
+				},
+				success:function(data){ 
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+					if(data['status']==0){
+						// window.location.href="./main.html";
+					}
+					msg = data["info"];
+					title = data["title"];
+					mui.alert(msg, title, function() {
+						window.location.href="./main.html";
+					});
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log(type);
+					mui.confirm(type, '好像有点问题',['不管他'], function() {
+						window.location.href="./main.html";
+					},'div');
+				}
+			});
+				
+		}
+		welcome();
+	</script>
+	
+	
+</html>

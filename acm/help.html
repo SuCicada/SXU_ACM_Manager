@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="./css/mui.css" rel="stylesheet" />
+
+	</head>
+
+	<body>
+		<script src="./js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+		</script>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">关于</h1>
+			<a class="mui-icon mui-icon-compose mui-pull-right" href="./feedback.html"></a>
+		</header>
+		<div class="mui-content">
+			<div class="mui-card">
+				<div class="mui-card-header">
+					<img src="./images/t010.jpg" style="height: 200px;width: auto;margin: 0 auto; "/>
+				</div>
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner mui-card-media">
+						<div style="color: #333;">
+							大家好，这里是SuCicada，希望大家用的喜欢，
+							有什么建议和反馈，联系我
+							 <span style="font-size:13px;">（或者直接点右上角...）</span> <br>
+							<span onclick="copy('copied')">
+								<span  id="copied" style="color: #CF2D28;">
+									1054171802@qq.com
+								</span>
+							(点击复制)<br>
+							</span> 
+							
+							<br>
+							<span onclick="copy('copied_git')">
+								<span>Source Code:(click to copy)<br/></span>
+								<span style="color: #008000;" id="copied_git">
+									https://github.com/SuCicada/SXU_ACM_Manager
+								</span>
+							</span>
+						<div>	
+					</div>
+				</div>
+				<!-- <div class="mui-card-footer" >
+					<div>
+					<span style="color: #2AC845;font-size: 21px;">征集</span>：图标、需求
+					</div>
+				</div> -->
+				
+			</div> 
+		</div>
+<!-- 		<div class="mui-loading">
+	<div class="mui-spinner">
+	</div>
+    玩命加载中...
+</div> -->
+
+
+
+	</body>
+	
+	<script>	
+
+	
+		function copy(id){
+		   // https://www.cnblogs.com/summer0319/p/7243465.html
+			var text = document.getElementById(id).innerHTML;
+			text = text.replace(/(^\s*)|(\s*$)/g, "");
+			var textArea = document.createElement("textarea");
+		
+			textArea.style.background = 'transparent';
+			textArea.value = text;
+			document.body.appendChild(textArea);
+			textArea.select();
+	
+			try {
+				var successful = document.execCommand('copy');
+				var msg = successful ? '成功复制到剪贴板' : '不支持点击复制到剪贴板';
+				mui.toast(msg);
+			} catch (err) {
+				mui.toast('不支持点击复制到剪贴板');
+			}
+
+			document.body.removeChild(textArea);
+		}
+	</script>
+	
+
+</html>

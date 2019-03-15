@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="./css/mui.css" rel="stylesheet" />
+		<link href="./css/loading.css" rel="stylesheet" />
+		<style type="text/css">
+			.feedback .mui-inline {
+				vertical-align: bottom;
+				font-size: 14px;
+				color: #8f8f94;
+			}
+			.feedback textarea {
+				height: 150px;
+				margin-bottom: 0 !important;
+				padding-bottom: 0 !important;
+			}
+			input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{
+				font-size: 14px;
+			}
+		</style>
+	</head>
+
+	<body class="feedback">
+		<script src="./js/mui.js"></script>
+		<script src="./js/loading.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" href="./main.html" ></a>
+			<h1 class="mui-title">反馈</h1>
+			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">发送</button>
+		</header>
+		<div class="mui-content">
+			<div class="mui-content-padded">
+				<div class="mui-inline">问题和意见</div>
+			</div>
+				<div class="row mui-input-row">
+					<textarea id='question' class="mui-input-clear question" placeholder="请详细描述你的问题和意见..."></textarea>
+				</div>
+				</div>
+			</div>
+	</body>
+	<script type="text/javascript">
+		document.getElementById('submit').addEventListener('tap', function() {
+			seed();
+		});
+		
+		function seed(){
+			var str = document.getElementById("question").value;
+			
+			if(str=="" || str == null){
+				mui.confirm("","不写点什么呢...",['好'],function(){
+				},'div');
+				return;
+			}
+			
+			mui.ajax('http://cicada.iask.in/ACM/acm.php',{
+				data:{
+					q:'feedback',
+					info:str
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为秒；
+				headers:{'Content-Type':'application/x-www-form-urlencoded'},
+				beforeSend: function() {
+					msg = "发送中...";
+					mui.showLoading(msg,"div"); //加载文字和类型，plus环境中类型为div时强制以div方式显示  		
+				},
+				complete: function() {
+					mui.hideLoading(function(){					
+					});//隐藏后的回调函数 
+					document.getElementById("question").value="";
+					mui.confirm("","谢谢你的支持,请继续支持我们",['不要','绝对支持'],function(e){
+						if(e.index==0){
+							mui.alert("","伤心的说",['呵呵'],null,'div');
+						}else{
+							mui.alert("","非常非常感谢你们",['嗯...'],null,'div');
+						}
+					},'div');
+				},
+				success:function(data){
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+
+					mui.alert('服务器错误', '', function() {});
+
+				}
+			});
+		}
+	</script>
+
+</html>

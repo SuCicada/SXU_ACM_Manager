@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello ACM</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="./css/mui.min.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="./css/loading.css"/>		
+		<link rel="stylesheet" type="text/css" href="./css/spider.css">
+		<!-- <link rel="stylesheet" type="text/css" href="./css/pull.css"> -->
+		<style>
+			.mui-content-padded{
+			  	margin: 10px;
+			  }
+			.mui-bar-nav~.mui-content {
+				padding-top: 1px;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!--侧滑菜单部分-->
+			<aside id="offCanvasSide" class="mui-off-canvas-left">
+				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="title">菜单</div>
+						<div class="content">
+
+						</div>
+						<!-- <div class="title" style="margin-bottom: 25px;"></div> -->
+						<ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted">
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right" id="setting">
+									设置
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right" id="help2">
+									关于
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right" id="feedback">
+									反馈
+								</a>
+							</li>
+							
+						</ul>
+					</div>
+				</div>
+			</aside>
+
+			<!--主界面部分-->
+			<div class="mui-inner-wrap" id="offCanvasWrapper">
+
+				<header class="mui-bar mui-bar-nav">
+					<!-- <a class="mui-action-back mui-icon mui-icon-back mui-pull-left"></a> -->
+					<a href="#offCanvasSide" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+					<h1 class="mui-title">ACM-ICPC</h1>
+					<a id="help" class="mui-icon mui-icon-help mui-pull-right"></a>
+				</header>
+				
+				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+
+				
+					<div class="mui-content" style="padding-top: 40px;">
+						<div class="mui-content-padded">
+							<button onclick="check();mui.toast('查看成功');" type="button" class="mui-btn mui-btn-success mui-btn-block">
+								点击查看
+							</button>
+						</div>
+					</div>
+					
+					<div class="mui-content">
+						<div class="mui-card">
+							<div class="mui-card-content">
+								<div id="showbar" class="mui-card-content-inner" 
+									style="text-align: center;">
+									院队现在门开吗
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="div_switch" class="mui-content" style="display: none;">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<span></span>
+								<div id="mySwitch" class="mui-switch mui-active " >
+									<div class="mui-switch-handle"></div>
+								</div>
+							</li>
+						</ul>
+					</div>
+			
+				</div>
+			</div>
+		</div>
+
+		
+	</body>
+	<script src="./js/mui.min.js"></script>
+	<script src="./js/loading.js"></script>
+	<script src="./js/main.js"></script>		
+	<script src="./js/spider.js"></script>
+	<script>
+		mui.init({
+			swipeBack:false ,//启用右滑关闭功能
+			pullRefresh : {
+				container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+				down : {
+				  style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+				  color:'#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+				  height:'50px',//可选,默认50px.下拉刷新控件的高度,
+				  range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+				  offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+				  auto: false,//可选,默认false.首次加载自动上拉刷新一次
+				  callback :function(){
+					  location.reload();
+				  } //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+				}
+			  }
+		});
+		
+		
+	</script>
+	
+	<script>
+		//tap为mui封装的单击事件，可参考手势事件章节
+		document.getElementById('help').addEventListener('tap', function() {
+		  //打开关于页面
+		  mui.openWindow({
+			url: './help.html', 
+			id:'help'
+		  });
+		});
+		document.getElementById('help2').addEventListener('tap', function() {
+		  mui.openWindow({
+			url: './help.html', 
+			id:'help'
+		  });
+		});
+		document.getElementById('setting').addEventListener('tap', function() {
+		  mui.openWindow({
+			url: './setting.html', 
+			id:'setting'
+		  });
+		});
+		document.getElementById('feedback').addEventListener('tap', function() {
+		  //打开关于页面
+		  mui.openWindow({
+			url: './feedback.html', 
+			id:'feedback'
+		  });
+		});
+	</script>
+</html>

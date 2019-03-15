@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="./css/mui.css" rel="stylesheet" />
+
+	</head>
+
+	<body>
+		<script src="./js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+		</script>
+		
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">设置</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-card">
+				<div class="mui-card-header">
+					<div style="margin:0 auto;">
+						主页滑动效果（重启生效）
+					</div>
+				</div>	
+				<form class="mui-input-group" style="margin-bottom: 15px;">
+					<div class="mui-input-row mui-radio mui-selected">
+						<label>主界面移动、菜单不动</label>
+						<input name="style" type="radio" value="main-move">
+					</div>
+					<div class="mui-input-row mui-radio">
+						<label>主界面不动、菜单移动</label>
+						<input name="style" type="radio" value="menu-move">
+					</div>
+					<div class="mui-input-row mui-radio mui-hidden" id="move-togger">
+						<label>整体移动</label>
+						<input name="style" type="radio" value="all-move">
+					</div>
+					<div class="mui-input-row mui-radio">
+						<label>缩放式侧滑（类手机QQ）</label>
+						<input name="style" type="radio" value="main-move-scalable">
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</body>
+	
+	<script>	
+		// 一开始就拿到存储的 选项
+		var method = localStorage.getItem('splider_method');
+		if(method==null){
+			localStorage.setItem('splider_method','main-move');
+			method = 'main-move'; 
+		}
+		// 找是属于哪一个 input 的选项
+		var index;
+		switch (method) {
+			case 'main-move':
+				index = 0;	
+				break;
+			case 'menu-move':
+				index = 1;
+				break;
+			case 'all-move':
+				index = 2;
+				break;
+			case 'main-move-scalable':
+				index = 3;
+				break;
+		}
+		// 拿到这个 input 标签对象, 并将其选中
+		var obj = document.getElementsByTagName("input")[index];
+		obj.setAttribute("checked","checked");
+		
+		// obj.checked = "";
+		// alert(obj.value);
+		
+		// 不兼容 Android？ 那不是太惨了？我就想要这个
+		if (!mui.os.android) {
+			document.getElementById("move-togger").classList.remove('mui-hidden');
+			var spans = document.querySelectorAll('.android-only');
+			for (var i = 0, len = spans.length; i < len; i++) {
+				spans[i].style.display = "none";
+			}
+		}
+		// 监听选项
+		mui('.mui-input-group').on('change', 'input', function() {
+			// alert("ddd");
+			if (this.checked) {
+				// 存储选项
+				localStorage.setItem('splider_method',this.value);
+				mui.toast("设置成功");
+			}
+		});
+	
+	</script>
+</html>
