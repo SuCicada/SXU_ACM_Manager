@@ -1,5 +1,5 @@
 # SXU_ACM_Manager
-为了门   <br>
+为了门 ,查看现在开门了吗，钥匙在谁手中？  <br>
 开发环境：
 操作系统：Windows7 旗舰版 32位 4G内存   <br>
 服务器：树莓派3B+  raspberrypi    <br>
