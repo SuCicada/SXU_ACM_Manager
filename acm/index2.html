@@ -68,7 +68,7 @@
 				timeout:4000,//超时时间设置为10秒；
 				//headers:{'Content-Type':'application/json'},	              
 				beforeSend: function() {
-					msg = "读取蝉说";
+					msg = "捕蝉者说";
 					mui.showLoading(msg,"div"); //加载文字和类型，plus环境中类型为div时强制以div方式显示  		
 				},
 				complete: function() {
@@ -79,13 +79,28 @@
 				success:function(data){ 
 					//服务器返回响应，根据响应结果，分析是否登录成功；
 					if(data['status']==0){
-						// window.location.href="./main.html";
+						window.location.href="./main.html";
 					}
 					msg = data["info"];
 					title = data["title"];
-					mui.alert(msg, title, function() {
+					mui.confirm(msg, title, function() {
 						window.location.href="./main.html";
-					});
+					},'div');
+		index = 2;	
+		while(1){
+			var a = document.getElementsByTagName('a')[index++];
+			if(!a){
+				break;
+			}
+			// https://www.cnblogs.com/liao8735/p/3944913.html
+			var fun = function(a){
+				a.addEventListener('tap',function(){
+					var href = a.href;
+					void plus.runtime.openURL(href);
+				});				
+			}
+			fun(a);
+		} 
 				},
 				error:function(xhr,type,errorThrown){
 					//异常处理；
@@ -98,6 +113,7 @@
 				
 		}
 		welcome();
+
 	</script>
 	
 	

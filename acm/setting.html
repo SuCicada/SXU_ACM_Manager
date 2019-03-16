@@ -18,14 +18,14 @@
 		</script>
 		
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a id="main" class=" mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">设置</h1>
 		</header>
 		<div class="mui-content">
 			<div class="mui-card">
 				<div class="mui-card-header">
 					<div style="margin:0 auto;">
-						主页滑动效果（重启生效）
+						主页滑动效果
 					</div>
 				</div>	
 				<form class="mui-input-group" style="margin-bottom: 15px;">
@@ -37,7 +37,7 @@
 						<label>主界面不动、菜单移动</label>
 						<input name="style" type="radio" value="menu-move">
 					</div>
-					<div class="mui-input-row mui-radio mui-hidden" id="move-togger">
+					<div class="mui-input-row mui-radio  " id="move-togger">
 						<label>整体移动</label>
 						<input name="style" type="radio" value="all-move">
 					</div>
@@ -46,6 +46,7 @@
 						<input name="style" type="radio" value="main-move-scalable">
 					</div>
 				</form>
+				<div class="mui-card-footer">（左上返回生效,或者主页下拉刷新）</div>
 			</div>
 		</div>
 
@@ -98,6 +99,15 @@
 				mui.toast("设置成功");
 			}
 		});
-	
+		document.getElementById('main').addEventListener('tap', function() {
+			mui.toast("设置生效");
+			//打开关于页面
+			setTimeout(function() {
+				mui.openWindow({
+					url: './main.html', 
+					id:'main'
+				});
+			}, 500);
+		});
 	</script>
 </html>

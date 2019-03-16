@@ -22,11 +22,11 @@
 				padding-top: 1px;
 			}
 		</style>
-	</head>
+	</head> 
 
-	<body>
-		
-		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+	<body class="body">
+		<!-- <div id="refreshContainer" class=" mui-off-canvas-wrap mui-draggable">是谁</div> -->
+		<div id="offCanvasWrapper" class=" mui-off-canvas-wrap mui-draggable">
 			<!--侧滑菜单部分-->
 			<aside id="offCanvasSide" class="mui-off-canvas-left">
 				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
@@ -57,9 +57,14 @@
 					</div>
 				</div>
 			</aside>
-
+			
+			
+	<!-- <div id="pullrefresh" class="scroll-wrapper"> -->
+	<!-- <div class="mui-scroll"> -->
+		<!-- </div> -->
+		<!-- </div> -->
 			<!--主界面部分-->
-			<div class="mui-inner-wrap" id="offCanvasWrapper">
+			<div class="mui-inner-wrap">
 
 				<header class="mui-bar mui-bar-nav">
 					<!-- <a class="mui-action-back mui-icon mui-icon-back mui-pull-left"></a> -->
@@ -104,33 +109,47 @@
 				</div>
 			</div>
 		</div>
-
+		<!-- <div id='a'></div> -->
+	<!-- </div> -->
+	<!-- </div> -->
 		
 	</body>
-	<script src="./js/mui.min.js"></script>
+	<script>var h5pullDown = true;</script>
+	<script src="./js/mui.js"></script>
 	<script src="./js/loading.js"></script>
 	<script src="./js/main.js"></script>		
 	<script src="./js/spider.js"></script>
 	<script>
 		mui.init({
-			swipeBack:false ,//启用右滑关闭功能
-			pullRefresh : {
-				container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-				down : {
-				  style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-				  color:'#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-				  height:'50px',//可选,默认50px.下拉刷新控件的高度,
-				  range:'100px', //可选 默认100px,控件可下拉拖拽的范围
-				  offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
-				  auto: false,//可选,默认false.首次加载自动上拉刷新一次
-				  callback :function(){
-					  location.reload();
-				  } //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-				}
-			  }
+			gestureConfig:{
+			   tap: true, //默认为true
+			   swipe: true //默认为true
+			},
+			swipeBack:false ,//右滑关闭功能
+// 			 pullRefresh : {
+// 				container:"#offCanvasWrapper",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+// 				down : {
+// 				  style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+// // 				  color:'#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+// // 				  height:'50px',//可选,默认50px.下拉刷新控件的高度,
+// // 				  range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+// // 				  offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+// 				  // auto: true,//可选,默认false.首次加载自动上拉刷新一次
+// 				  callback :pulldownRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+// 			   },
+// 		   }
 		});
-		
-		
+		function pulldownRefresh() {
+			mui.toast("刷新成功");
+			location.reload();
+		}
+		document.getElementById('offCanvasWrapper').addEventListener("swipedown",function(){
+			msg = "刷新中";
+			mui.toast("刷新成功");
+			setTimeout(function() {
+				location.reload();
+			}, 110);
+		});
 	</script>
 	
 	<script>

@@ -171,7 +171,7 @@ function yourname(){
 				}
 			});
 		}
-	});
+	},'div');
 }
 	
 function open_or_close(password, active){
